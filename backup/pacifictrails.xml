@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.7.9
+- https://www.phpmyadmin.net
+-
+- Host: 127.0.0.1
+- Generation Time: Apr 10, 2018 at 01:43 AM
+- Server version: 10.1.31-MariaDB
+- PHP Version: 5.6.34
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="pacifictrails" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="activity">
+                CREATE TABLE `activity` (
+                  `activityid` int(11) NOT NULL AUTO_INCREMENT,
+                  `description` varchar(100) NOT NULL,
+                  PRIMARY KEY (`activityid`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="client">
+                CREATE TABLE `client` (
+                  `clientid` int(11) NOT NULL AUTO_INCREMENT,
+                  `fname` varchar(50) NOT NULL,
+                  `lname` varchar(50) NOT NULL,
+                  `address` varchar(100) NOT NULL,
+                  `phone` varchar(10) NOT NULL,
+                  `email` varchar(100) NOT NULL,
+                  `resid` int(11) NOT NULL,
+                  `activityid` int(11) NOT NULL,
+                  PRIMARY KEY (`clientid`),
+                  KEY `activityid` (`activityid`),
+                  CONSTRAINT `client_ibfk_1` FOREIGN KEY (`activityid`) REFERENCES `activity` (`activityid`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="order">
+                CREATE TABLE `order` (
+                  `name` varchar(100) NOT NULL,
+                  `email` varchar(100) NOT NULL,
+                  `address` varchar(200) NOT NULL,
+                  `city` varchar(100) NOT NULL,
+                  `state` varchar(100) NOT NULL,
+                  `zip` varchar(100) NOT NULL,
+                  `cc` varchar(100) NOT NULL,
+                  `month` varchar(20) NOT NULL,
+                  `year` varchar(100) NOT NULL,
+                  `orderid` int(11) NOT NULL AUTO_INCREMENT,
+                  PRIMARY KEY (`orderid`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="ordertable">
+                CREATE TABLE `ordertable` (
+                  `name` varchar(100) NOT NULL,
+                  `email` varchar(100) NOT NULL,
+                  `address` varchar(100) NOT NULL,
+                  `city` varchar(100) NOT NULL,
+                  `state` varchar(100) NOT NULL,
+                  `zip` varchar(100) NOT NULL,
+                  `cc` int(100) NOT NULL,
+                  `month` varchar(100) NOT NULL,
+                  `year` varchar(100) NOT NULL,
+                  `orderid` int(100) NOT NULL AUTO_INCREMENT,
+                  `cost` double NOT NULL,
+                  PRIMARY KEY (`orderid`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="package">
+                CREATE TABLE `package` (
+                  `packageid` int(11) NOT NULL AUTO_INCREMENT,
+                  `description` varchar(100) NOT NULL,
+                  `noofnights` int(11) NOT NULL,
+                  `cost` double NOT NULL,
+                  `summary` varchar(500) NOT NULL,
+                  `name` varchar(50) NOT NULL,
+                  PRIMARY KEY (`packageid`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="reservationyurt">
+                CREATE TABLE `reservationyurt` (
+                  `resid` int(11) NOT NULL AUTO_INCREMENT,
+                  `arrivalDate` date NOT NULL,
+                  `noofnights` int(11) NOT NULL,
+                  `packageid` int(11) NOT NULL,
+                  PRIMARY KEY (`resid`),
+                  KEY `packageid` (`packageid`),
+                  CONSTRAINT `reservationyurt_ibfk_1` FOREIGN KEY (`packageid`) REFERENCES `package` (`packageid`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="temp">
+                CREATE TABLE `temp` (
+                  `quantity` int(11) NOT NULL,
+                  `cost` double NOT NULL,
+                  `description` varchar(50) NOT NULL,
+                  PRIMARY KEY (`description`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="test">
+                CREATE TABLE `test` (
+                  `fname` varchar(50) NOT NULL,
+                  `lname` varchar(50) NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="whenres">
+                CREATE TABLE `whenres` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `date` date NOT NULL,
+                  `activityid` int(11) NOT NULL,
+                  `clientid` int(11) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `activityid` (`activityid`),
+                  KEY `clientid` (`clientid`),
+                  CONSTRAINT `whenres_ibfk_1` FOREIGN KEY (`activityid`) REFERENCES `activity` (`activityid`),
+                  CONSTRAINT `whenres_ibfk_2` FOREIGN KEY (`clientid`) REFERENCES `client` (`clientid`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'pacifictrails'
+    -->
+    <database name="pacifictrails">
+        <!-- Table activity -->
+        <table name="activity">
+            <column name="activityid">1</column>
+            <column name="description">hiking</column>
+        </table>
+        <table name="activity">
+            <column name="activityid">2</column>
+            <column name="description">kayaking</column>
+        </table>
+        <table name="activity">
+            <column name="activityid">3</column>
+            <column name="description">birdwatching</column>
+        </table>
+        <!-- Table client -->
+        <table name="client">
+            <column name="clientid">25</column>
+            <column name="fname">Akshya</column>
+            <column name="lname">Raghavan</column>
+            <column name="address"></column>
+            <column name="phone">6825525292</column>
+            <column name="email">sakshyaraghavan@gmail.com</column>
+            <column name="resid">28</column>
+            <column name="activityid">2</column>
+        </table>
+        <table name="client">
+            <column name="clientid">26</column>
+            <column name="fname">Sushmitha</column>
+            <column name="lname">Krishna</column>
+            <column name="address"></column>
+            <column name="phone">6825525262</column>
+            <column name="email">nvkumar06@gmail.com</column>
+            <column name="resid">29</column>
+            <column name="activityid">2</column>
+        </table>
+        <table name="client">
+            <column name="clientid">27</column>
+            <column name="fname">vijayakumar</column>
+            <column name="lname">natarajan</column>
+            <column name="address"></column>
+            <column name="phone">9444442029</column>
+            <column name="email">nvkumar06@gmail.com</column>
+            <column name="resid">30</column>
+            <column name="activityid">1</column>
+        </table>
+        <table name="client">
+            <column name="clientid">28</column>
+            <column name="fname">miras</column>
+            <column name="lname">schoolS</column>
+            <column name="address"></column>
+            <column name="phone">8172726287</column>
+            <column name="email">nvkumar06@gmail.com</column>
+            <column name="resid">31</column>
+            <column name="activityid">1</column>
+        </table>
+        <table name="client">
+            <column name="clientid">29</column>
+            <column name="fname">miras</column>
+            <column name="lname">school</column>
+            <column name="address"></column>
+            <column name="phone">1122334554</column>
+            <column name="email">nvkumar06@gmail.com</column>
+            <column name="resid">32</column>
+            <column name="activityid">2</column>
+        </table>
+        <!-- Table order -->
+        <!-- Table ordertable -->
+        <table name="ordertable">
+            <column name="name">Akshya Raghavan</column>
+            <column name="email">sakshyaraghavan@gmail.com</column>
+            <column name="address">513, Summit Ave Apt 279</column>
+            <column name="city">ARLINGTON</column>
+            <column name="state">TX</column>
+            <column name="zip">76010</column>
+            <column name="cc">2147483647</column>
+            <column name="month">2018-01</column>
+            <column name="year">2018</column>
+            <column name="orderid">1</column>
+            <column name="cost">0</column>
+        </table>
+        <table name="ordertable">
+            <column name="name">Akshya Raghavan</column>
+            <column name="email">sakshyaraghavan@gmail.com</column>
+            <column name="address">513, Summit Ave Apt 279</column>
+            <column name="city">ARLINGTON</column>
+            <column name="state">TX</column>
+            <column name="zip">76010</column>
+            <column name="cc">2147483647</column>
+            <column name="month">2016-01</column>
+            <column name="year">2018</column>
+            <column name="orderid">2</column>
+            <column name="cost">0</column>
+        </table>
+        <table name="ordertable">
+            <column name="name">vijayakumar natarajan</column>
+            <column name="email">nvkumar06@gmail.com</column>
+            <column name="address">no 71 b new no 9 ramanathan street, krishnapuram ambattur</column>
+            <column name="city">chennai</column>
+            <column name="state">tamil nadu</column>
+            <column name="zip">600053</column>
+            <column name="cc">2147483647</column>
+            <column name="month">2018-01</column>
+            <column name="year">2019</column>
+            <column name="orderid">3</column>
+            <column name="cost">0</column>
+        </table>
+        <table name="ordertable">
+            <column name="name">vijayakumar natarajan</column>
+            <column name="email">nvkumar06@gmail.com</column>
+            <column name="address">no 71 b new no 9 ramanathan street, krishnapuram ambattur</column>
+            <column name="city">chennai</column>
+            <column name="state">tamil nadu</column>
+            <column name="zip">600053</column>
+            <column name="cc">2147483647</column>
+            <column name="month">2019-01</column>
+            <column name="year"></column>
+            <column name="orderid">4</column>
+            <column name="cost">0</column>
+        </table>
+        <table name="ordertable">
+            <column name="name">the university of texas at arlington</column>
+            <column name="email">sakshyaraghavan@gmail.com</column>
+            <column name="address">c/o office of international education, 1022 uta blvd</column>
+            <column name="city">arlington</column>
+            <column name="state">TEXAS</column>
+            <column name="zip">76019</column>
+            <column name="cc">2147483647</column>
+            <column name="month">2019-02</column>
+            <column name="year"></column>
+            <column name="orderid">5</column>
+            <column name="cost">0</column>
+        </table>
+        <table name="ordertable">
+            <column name="name">sowmya satyanarayana</column>
+            <column name="email">ssowmiyas1963@gmail.com</column>
+            <column name="address">plot no 17 aringnar anna 2nd street, perumatunallur guduvancheri</column>
+            <column name="city">kanchipuram</column>
+            <column name="state">tamil nadu</column>
+            <column name="zip">603202</column>
+            <column name="cc">2147483647</column>
+            <column name="month">2021-01</column>
+            <column name="year"></column>
+            <column name="orderid">6</column>
+            <column name="cost">0</column>
+        </table>
+        <table name="ordertable">
+            <column name="name">Akshya Raghavan</column>
+            <column name="email">sakshyaraghavan@gmail.com</column>
+            <column name="address">513, Summit Ave Apt 279</column>
+            <column name="city">ARLINGTON</column>
+            <column name="state">TX</column>
+            <column name="zip">76010</column>
+            <column name="cc">2147483647</column>
+            <column name="month">2020-10</column>
+            <column name="year"></column>
+            <column name="orderid">7</column>
+            <column name="cost">0</column>
+        </table>
+        <table name="ordertable">
+            <column name="name">st miras high school</column>
+            <column name="email">nvkumar06@gmail.com</column>
+            <column name="address">outer ring road btm layout</column>
+            <column name="city">bengaluru</column>
+            <column name="state">karnataka</column>
+            <column name="zip">560068</column>
+            <column name="cc">2147483647</column>
+            <column name="month">2016-04</column>
+            <column name="year"></column>
+            <column name="orderid">8</column>
+            <column name="cost">0</column>
+        </table>
+        <table name="ordertable">
+            <column name="name">Akshya Raghavan</column>
+            <column name="email">sakshyaraghavan@gmail.com</column>
+            <column name="address">513, Summit Ave Apt 279</column>
+            <column name="city">ARLINGTON</column>
+            <column name="state">TX</column>
+            <column name="zip">76010</column>
+            <column name="cc">2147483647</column>
+            <column name="month">2019-01</column>
+            <column name="year"></column>
+            <column name="orderid">9</column>
+            <column name="cost">0</column>
+        </table>
+        <table name="ordertable">
+            <column name="name">vijayakumar natarajan</column>
+            <column name="email">nvkumar06@gmail.com</column>
+            <column name="address">no 71 b new no 9 ramanathan street, krishnapuram ambattur</column>
+            <column name="city">chennai</column>
+            <column name="state">tamil nadu</column>
+            <column name="zip">600053</column>
+            <column name="cc">2147483647</column>
+            <column name="month">2018-01</column>
+            <column name="year"></column>
+            <column name="orderid">10</column>
+            <column name="cost">0</column>
+        </table>
+        <table name="ordertable">
+            <column name="name">sowmya satyanarayana</column>
+            <column name="email">ssowmiyas1963@gmail.com</column>
+            <column name="address">plot no 17 aringnar anna 2nd street, perumatunallur guduvancheri</column>
+            <column name="city">kanchipuram</column>
+            <column name="state">tamil nadu</column>
+            <column name="zip">603202</column>
+            <column name="cc">2147483647</column>
+            <column name="month">2020-04</column>
+            <column name="year"></column>
+            <column name="orderid">11</column>
+            <column name="cost">0</column>
+        </table>
+        <table name="ordertable">
+            <column name="name">Akshya Raghavan</column>
+            <column name="email">sakshyaraghavan@gmail.com</column>
+            <column name="address">513, Summit Ave Apt 279</column>
+            <column name="city">ARLINGTON</column>
+            <column name="state">TX</column>
+            <column name="zip">76010</column>
+            <column name="cc">2147483647</column>
+            <column name="month">2020-03</column>
+            <column name="year"></column>
+            <column name="orderid">12</column>
+            <column name="cost">0</column>
+        </table>
+        <!-- Table package -->
+        <table name="package">
+            <column name="packageid">1</column>
+            <column name="description">weekendescape</column>
+            <column name="noofnights">2</column>
+            <column name="cost">450</column>
+            <column name="summary">Two breakfasts, a trail map, and a picnic snack</column>
+            <column name="name">Weekend Escape</column>
+        </table>
+        <table name="package">
+            <column name="packageid">2</column>
+            <column name="description">zenretreat</column>
+            <column name="noofnights">4</column>
+            <column name="cost">600</column>
+            <column name="summary">Four breakfasts, a trail map, a picnic snack, and a pass for the daily sunrise Yoga session</column>
+            <column name="name">Zen Retreat</column>
+        </table>
+        <table name="package">
+            <column name="packageid">3</column>
+            <column name="description">kayakaway</column>
+            <column name="noofnights">2</column>
+            <column name="cost">500</column>
+            <column name="summary">Two breakfasts, two hours of kayak rental daily, and a trail map </column>
+            <column name="name">Kayak Away</column>
+        </table>
+        <!-- Table reservationyurt -->
+        <table name="reservationyurt">
+            <column name="resid">28</column>
+            <column name="arrivalDate">1996-12-01</column>
+            <column name="noofnights">5</column>
+            <column name="packageid">3</column>
+        </table>
+        <table name="reservationyurt">
+            <column name="resid">29</column>
+            <column name="arrivalDate">2018-02-01</column>
+            <column name="noofnights">5</column>
+            <column name="packageid">3</column>
+        </table>
+        <table name="reservationyurt">
+            <column name="resid">30</column>
+            <column name="arrivalDate">2019-10-31</column>
+            <column name="noofnights">5</column>
+            <column name="packageid">3</column>
+        </table>
+        <table name="reservationyurt">
+            <column name="resid">31</column>
+            <column name="arrivalDate">1996-01-09</column>
+            <column name="noofnights">5</column>
+            <column name="packageid">1</column>
+        </table>
+        <table name="reservationyurt">
+            <column name="resid">32</column>
+            <column name="arrivalDate">2019-03-01</column>
+            <column name="noofnights">5</column>
+            <column name="packageid">2</column>
+        </table>
+        <!-- Table temp -->
+        <!-- Table test -->
+        <table name="test">
+            <column name="fname">Akshya</column>
+            <column name="lname">Raghavan</column>
+        </table>
+        <table name="test">
+            <column name="fname">A</column>
+            <column name="lname">R</column>
+        </table>
+        <!-- Table whenres -->
+        <table name="whenres">
+            <column name="id">23</column>
+            <column name="date">1996-12-01</column>
+            <column name="activityid">1</column>
+            <column name="clientid">25</column>
+        </table>
+        <table name="whenres">
+            <column name="id">24</column>
+            <column name="date">2018-02-01</column>
+            <column name="activityid">2</column>
+            <column name="clientid">26</column>
+        </table>
+        <table name="whenres">
+            <column name="id">25</column>
+            <column name="date">2019-10-31</column>
+            <column name="activityid">1</column>
+            <column name="clientid">27</column>
+        </table>
+        <table name="whenres">
+            <column name="id">26</column>
+            <column name="date">1996-01-09</column>
+            <column name="activityid">1</column>
+            <column name="clientid">28</column>
+        </table>
+        <table name="whenres">
+            <column name="id">27</column>
+            <column name="date">2019-03-01</column>
+            <column name="activityid">2</column>
+            <column name="clientid">29</column>
+        </table>
+    </database>
+</pma_xml_export>
